@@ -14,6 +14,9 @@ class Client:
     def getFirst_name(self):
         return self.__first_name
     
+    def setLend(self, lend):
+        self.__lend.append(lend)
+    
     def getData(self):
         return {
             'cui':self.__cui,

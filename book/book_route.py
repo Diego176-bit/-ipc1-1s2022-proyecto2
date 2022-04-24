@@ -10,20 +10,20 @@ book = Blueprint('book', __name__, url_prefix= '/book')
 @book.route('', methods = ['POST'])
 def addBook():
     body = request.get_json()
-    #try:
-    if "isbn" in body and "title" in body and "author" in body and 'year' in body and 'no_copies' in body and 'no_available_copies' in body:
+    try:
+        if "isbn" in body and "title" in body and "author" in body and 'year' in body and 'no_copies' in body and 'no_available_copies' in body:
             
-            book = Book(body["isbn"], body["title"], body["author"], body['year'], body['no_copies'], body['no_available_copies'])
+                book = Book(body["isbn"], body["title"], body["author"], body['year'], body['no_copies'], body['no_available_copies'])
             
-            if db_bookstrore.addBook(book) == True:
-                return {'msg': 'Libro creado exitosamente'}, 201
+                if db_bookstrore.addBook(book) == True:
+                    return {'msg': 'Libro creado exitosamente'}, 201
 
-            elif db_bookstrore.addBook(book) == False:
-                return {'msg' : 'Libro duplicado'}, 400
-    else:
+                elif db_bookstrore.addBook(book) == False:
+                    return {'msg' : 'Libro duplicado'}, 400
+        else:
             return {'msg' : 'Faltan campos en la peticion'}, 400
-    #except:
-        #return {'msg': 'Ocurrio un error en el servidor'}, 500
+    except:
+        return {'msg': 'Ocurrio un error en el servidor'}, 500
     
 #Modificar un libro.
 @book.route('', methods = ['PUT'])

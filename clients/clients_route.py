@@ -25,6 +25,6 @@ def getClient(cui):
         if client != None:
             return client.getData(),200
         else:
-            return {'msg': 'no se encontro el cliente'}
+            return {'msg': 'no se encontro el cliente'},400
     except:
         return {'msg': 'Error en el servidor'},500

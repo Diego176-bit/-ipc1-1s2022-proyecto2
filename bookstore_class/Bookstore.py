@@ -106,7 +106,10 @@ class Bookstore:
     '''Prestamos'''
     
     def addBorrow(self, borrow):
-            if not borrow.getCui() in self.__cui_lend:
+            if not borrow.getCui() in self.__cui_lend and borrow.getCui() in self.__cui and borrow.getIsbn() in self.__isbn:
+                for client in self.__clients:
+                    if client.getCui() == borrow.getCui():
+                        client.setLend(borrow.getBorrow())
                 self.__borrow.append(borrow)
                 self.__cui_lend.append(borrow.getCui())
                 self.__uuid.append(str(borrow.getUuid()))
